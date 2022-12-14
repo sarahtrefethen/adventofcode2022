@@ -1,6 +1,6 @@
  
 
-chars = 'Sabcdefghijklmnopqrstuvwxyz'
+chars = 'SabcdefghijklmnopqrstuvwxyzE'
 
 chars_to_ints = {chars[x]: x for x in range(len(chars))}
 
@@ -15,14 +15,14 @@ map_area = len(map) * len(map[0])
 n = 0
 
 paths = [{
-    'current': start,
+    'current': end,
     'visited': set(),
 }]
 
 def test_step(current_char_value, next_x, next_y): 
     next_char = "z" if map[next_x][next_y] == "E" else map[next_x][next_y]
 
-    return  chars_to_ints[next_char] <= current_char_value + 1   
+    return  chars_to_ints[next_char] >= current_char_value - 1   
 
 found = False
 while(not found):
@@ -37,7 +37,7 @@ while(not found):
         (x, y) = path['current']
         visited = path['visited']
         visited.add(f'{x},{y}')  
-        if(map[x][y] == "E"):
+        if(map[x][y] == "a"):
             print(f'part 1: {n}')
             found = True
             break
