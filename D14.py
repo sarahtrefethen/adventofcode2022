@@ -29,6 +29,36 @@ with open("D14input.txt") as file:
         add_to_grid(path)
         line = file.readline()
 
+def drop_sand():
+    sand_row = 0
+    sand_col = 100
+
+
+    while(True):
+        print(f'{sand_row},{sand_col}')
+        if sand_row >= 200 or sand_col >= 106 or sand_col < 0:
+            break
+        if grid[sand_row + 1][sand_col] == ".":
+            sand_row += 1
+        elif grid[sand_row + 1][sand_col - 1]  == ".":
+            sand_row += 1
+            sand_col -= 1
+        elif grid[sand_row + 1][sand_col + 1]  == ".":
+            sand_row += 1
+            sand_col += 1
+        else:
+            break
+
+    grid[sand_row][sand_col] = "O"
+
+    #did the sand fall into the void?
+    return sand_row >= 200 or sand_col >= 106 or sand_col < 0
+
+sand_falling_forever = False
+counter = 0
+while(not sand_falling_forever):
+    sand_falling_forever = drop_sand()
+    counter+=1
 
 [print(''.join(row)) for row in grid]
-
+print(counter)
